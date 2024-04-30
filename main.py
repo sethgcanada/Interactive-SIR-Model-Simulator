@@ -1,3 +1,46 @@
+"""
+SIR Model Simulation Using Python and Mathematica
+
+Project Overview:
+-----------------
+This project integrates Python with the Wolfram Mathematica kernel to simulate an SIR (Susceptible, Infected, Recovered) model. 
+The SIR model is a simple epidemiological model used to describe the spread of a disease through a population divided into 
+three compartments: susceptible, infected, and recovered.
+
+The script leverages the computational power of Mathematica's NDSolveValue function to solve the differential equations 
+representing the SIR model dynamics. Python is used to handle the input/output and to plot the results using matplotlib. 
+This allows for a detailed visual analysis of how an infectious disease could potentially spread through a population 
+over time under given initial conditions.
+
+Specialized Commands:
+---------------------
+1. `WolframLanguageSession`: Establishes a session with the Mathematica kernel. This is necessary to execute Mathematica code from Python.
+2. `NDSolveValue`: A Mathematica function used to solve differential equations numerically. It is crucial for obtaining the dynamics of the SIR model.
+3. `matplotlib.pyplot`: Used in Python to plot the data obtained from the Mathematica computation, allowing for visual analysis.
+
+Method/Steps:
+-------------
+To successfully run this simulation, follow these steps:
+1. Ensure Mathematica and Python are installed on your machine along with the required libraries (wolframclient, matplotlib).
+2. Configure the path to your Mathematica kernel in the script.
+3. Run the Python script. The script will communicate with Mathematica to perform the simulation and then use Python to plot the results.
+
+Representative Example:
+-----------------------
+The script sets initial conditions with 1,000,000 susceptible individuals, 100 infected, and 0 recovered. It simulates the 
+disease spread over 100 days, assuming very low disease transmission and recovery rates. By adjusting these rates or initial 
+conditions, the user can simulate different scenarios and analyze the impacts of various intervention strategies.
+
+Usage Guidance:
+---------------
+- Inputs: Adjust `S0`, `G0`, `R0`, `beta`, and `gamma` in the script to change the initial conditions and model parameters.
+- Returns: The script will output a plot showing the number of susceptible, infected, and recovered individuals over time.
+- Limitations: The model assumes a closed population without births, deaths (unrelated to the disease), or disease-induced mortality.
+
+Ensure the kernel_path variable is correctly set to the location of your Mathematica installation. Run the script using a Python 
+interpreter to see the epidemic curve plotted.
+"""
+
 from wolframclient.evaluation import WolframLanguageSession
 from wolframclient.language import wlexpr
 import matplotlib.pyplot as plt
@@ -7,8 +50,8 @@ def main():
     with WolframLanguageSession(kernel_path) as session:
         session.start()
         # Parameters
-        # Transmission rate is 0.000001
-        # Recovery rate is 0.1
+        # Transmission rate is 0.000001, this is supposed to be beta
+        # Recovery rate is 0.1, this is supposed to be gamma
         
         # Mathematica code with correctly escaped braces
         mathematica_code = """
